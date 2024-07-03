@@ -1,0 +1,54 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 document.addEventListener('DOMContentLoaded', function() \{\
+    const taskInput = document.getElementById('taskInput');\
+    const addTaskButton = document.getElementById('addTaskButton');\
+    const taskList = document.getElementById('taskList');\
+\
+    addTaskButton.addEventListener('click', addTask);\
+\
+    function addTask() \{\
+        const taskText = taskInput.value.trim();\
+        if (taskText === '') \{\
+            alert('Please enter a task.');\
+            return;\
+        \}\
+\
+        const li = document.createElement('li');\
+        const span = document.createElement('span');\
+        span.textContent = taskText;\
+        li.appendChild(span);\
+\
+        const editButton = document.createElement('button');\
+        editButton.textContent = 'Edit';\
+        editButton.className = 'edit-btn';\
+        editButton.addEventListener('click', () => editTask(span));\
+        li.appendChild(editButton);\
+\
+        const deleteButton = document.createElement('button');\
+        deleteButton.textContent = 'Delete';\
+        deleteButton.className = 'delete-btn';\
+        deleteButton.addEventListener('click', () => deleteTask(li));\
+        li.appendChild(deleteButton);\
+\
+        taskList.appendChild(li);\
+        taskInput.value = '';\
+    \}\
+\
+    function editTask(span) \{\
+        const newTaskText = prompt('Edit task:', span.textContent);\
+        if (newTaskText !== null && newTaskText.trim() !== '') \{\
+            span.textContent = newTaskText.trim();\
+        \}\
+    \}\
+\
+    function deleteTask(li) \{\
+        taskList.removeChild(li);\
+    \}\
+\});\
+}
